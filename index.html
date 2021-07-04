@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript" src="engine.js"></script>
+    <script type="text/javascript">
+        var pjs = new PointJS(1000, 500, {
+            backgroundColor: 'wheat'
+        });
+        var game = pjs.game
+        var key = pjs.keyControl
+
+        key.initControl()
+        var p = pjs.vector.point
+        var rect = game.newRectObject({
+            x: 100,
+            y: 100,
+            w: 50,
+            h: 50,
+            fillColor: "#FBFE6F",
+            strokeColor: "green",
+            strokeWidth: 6
+        })
+
+        pjs.game.newLoop("dino", function() {
+
+            if (key.isDown('D') || key.isDown('RIGHT')) {
+                rect.move(p(1, 0));
+            }
+            if (key.isDown('S') || key.isDown('DOWN')) {
+                rect.move(p(0, 1));
+            }
+            if (key.isDown('A') || key.isDown('LEFT')) {
+                rect.move(p(-1, 0));
+            }
+            if (key.isDown('W') || key.isDown('UP')) {
+                rect.move(p(0, -1));
+            }
+            rect.turn(0)
+            rect.draw()
+        });
+        game.setLoop("dino")
+
+
+
+        game.start()
+    </script>
+</body>
+
+</html>
